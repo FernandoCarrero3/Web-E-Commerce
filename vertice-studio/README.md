@@ -1,16 +1,126 @@
-# React + Vite
+# Vertice Studio — E-Commerce
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A modern, fully responsive e-commerce storefront for digital art prints, built as a frontend SPA with React and Vite. Demonstrates a complete purchase flow from product browsing to order confirmation, with persistent cart state and a clean, minimalist UI.
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Live Demo
 
-## React Compiler
+> _Deploy link — e.g. Vercel/Netlify — (coming soon)_
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+---
 
-## Expanding the ESLint configuration
+## Screenshots
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+| Home | Product Detail | Cart |
+|------|---------------|------|
+| ![Home page showing product grid](docs/screenshots/home.png) | ![Product detail page](docs/screenshots/product-detail.png) | ![Shopping cart](docs/screenshots/cart.png) |
+
+---
+
+## Features
+
+- **Product catalog** — responsive grid with product cards and detail pages
+- **Shopping cart** — add, remove, and adjust item quantities
+- **Persistent cart** — cart state survives page refreshes via `localStorage`
+- **Checkout flow** — billing and payment form with order summary
+- **Order confirmation** — post-purchase success screen
+- **Fully responsive** — mobile-first design that works on all screen sizes
+
+---
+
+## Tech Stack
+
+| Layer | Technology |
+|-------|------------|
+| Framework | [React 19](https://react.dev/) |
+| Build tool | [Vite 7](https://vitejs.dev/) |
+| Routing | [React Router v7](https://reactrouter.com/) |
+| Styling | [Tailwind CSS v3](https://tailwindcss.com/) |
+| Icons | [React Icons](https://react-icons.github.io/react-icons/) |
+| State | React Context API + `localStorage` |
+| Linting | ESLint 9 |
+
+---
+
+## Project Structure
+
+```
+src/
+├── assets/
+│   └── images/          # Product images
+├── components/
+│   ├── Navbar.jsx        # Top navigation with live cart count
+│   ├── ProductCard.jsx   # Reusable product card
+│   └── Footer.jsx        # Site footer
+├── context/
+│   └── CartContext.jsx   # Global cart state (Context + useReducer pattern)
+├── data/
+│   └── data.js           # Product catalogue data
+└── pages/
+    ├── Home.jsx           # Product listing
+    ├── ProductDetail.jsx  # Single product view
+    ├── Cart.jsx           # Cart management
+    ├── Checkout.jsx       # Checkout form
+    └── OrderSuccess.jsx   # Order confirmation
+```
+
+---
+
+## Getting Started
+
+### Prerequisites
+
+- [Node.js](https://nodejs.org/) v18 or higher
+- npm v9 or higher
+
+### Installation
+
+```bash
+# 1. Clone the repository
+git clone https://github.com/your-username/vertice-studio.git
+cd vertice-studio
+
+# 2. Install dependencies
+npm install
+
+# 3. Start the development server
+npm run dev
+```
+
+The app will be available at `http://localhost:5173`.
+
+### Available Scripts
+
+| Command | Description |
+|---------|-------------|
+| `npm run dev` | Start dev server with Hot Module Replacement |
+| `npm run build` | Create optimised production build in `/dist` |
+| `npm run preview` | Preview the production build locally |
+| `npm run lint` | Run ESLint across the codebase |
+
+---
+
+## Roadmap
+
+- [ ] Form validation with [react-hook-form](https://react-hook-form.com/) + [Zod](https://zod.dev/)
+- [ ] Toast notifications for cart actions
+- [ ] Product search and category filtering
+- [ ] 404 / not-found page
+- [ ] Loading skeleton screens
+- [ ] Migrate to TypeScript
+- [ ] Unit tests with [Vitest](https://vitest.dev/)
+- [ ] GitHub Actions CI pipeline
+- [ ] Deploy to Vercel
+
+---
+
+## Contributing
+
+This is a personal portfolio project, but feedback and suggestions are welcome. Feel free to open an issue.
+
+---
+
+## License
+
+Distributed under the [MIT License](LICENSE).
