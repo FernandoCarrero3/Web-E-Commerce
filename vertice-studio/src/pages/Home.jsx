@@ -1,7 +1,7 @@
 // src/pages/Home.jsx
-import React from 'react';
-import { products } from '../data'; // 1. Importar nuestros productos
-import ProductCard from '../components/ProductCard'; // 2. Importar la tarjeta
+import React from 'react'
+import { products } from '../data' // 1. Importar nuestros productos
+import ProductCard from '../components/ProductCard' // 2. Importar la tarjeta
 
 const Home = () => {
   return (
@@ -18,7 +18,7 @@ const Home = () => {
         ))}
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default Home;
+export default Home

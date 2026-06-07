@@ -12,8 +12,8 @@ A modern, fully responsive e-commerce storefront for digital art prints, built a
 
 ## Screenshots
 
-| Home | Product Detail | Cart |
-|------|---------------|------|
+| Home                                                         | Product Detail                                              | Cart                                        |
+| ------------------------------------------------------------ | ----------------------------------------------------------- | ------------------------------------------- |
 | ![Home page showing product grid](docs/screenshots/home.png) | ![Product detail page](docs/screenshots/product-detail.png) | ![Shopping cart](docs/screenshots/cart.png) |
 
 ---
@@ -31,15 +31,15 @@ A modern, fully responsive e-commerce storefront for digital art prints, built a
 
 ## Tech Stack
 
-| Layer | Technology |
-|-------|------------|
-| Framework | [React 19](https://react.dev/) |
-| Build tool | [Vite 7](https://vitejs.dev/) |
-| Routing | [React Router v7](https://reactrouter.com/) |
-| Styling | [Tailwind CSS v3](https://tailwindcss.com/) |
-| Icons | [React Icons](https://react-icons.github.io/react-icons/) |
-| State | React Context API + `localStorage` |
-| Linting | ESLint 9 |
+| Layer      | Technology                                                |
+| ---------- | --------------------------------------------------------- |
+| Framework  | [React 19](https://react.dev/)                            |
+| Build tool | [Vite 7](https://vitejs.dev/)                             |
+| Routing    | [React Router v7](https://reactrouter.com/)               |
+| Styling    | [Tailwind CSS v3](https://tailwindcss.com/)               |
+| Icons      | [React Icons](https://react-icons.github.io/react-icons/) |
+| State      | React Context API + `localStorage`                        |
+| Linting    | ESLint 9                                                  |
 
 ---
 
@@ -92,12 +92,12 @@ The app will be available at `http://localhost:5173`.
 
 ### Available Scripts
 
-| Command | Description |
-|---------|-------------|
-| `npm run dev` | Start dev server with Hot Module Replacement |
-| `npm run build` | Create optimised production build in `/dist` |
-| `npm run preview` | Preview the production build locally |
-| `npm run lint` | Run ESLint across the codebase |
+| Command           | Description                                  |
+| ----------------- | -------------------------------------------- |
+| `npm run dev`     | Start dev server with Hot Module Replacement |
+| `npm run build`   | Create optimised production build in `/dist` |
+| `npm run preview` | Preview the production build locally         |
+| `npm run lint`    | Run ESLint across the codebase               |
 
 ---
 

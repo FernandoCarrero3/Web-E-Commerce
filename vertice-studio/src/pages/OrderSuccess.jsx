@@ -1,7 +1,7 @@
 // src/pages/OrderSuccess.jsx
-import React from 'react';
-import { Link } from 'react-router-dom';
-import { FaCheckCircle } from 'react-icons/fa'; // Un icono bonito
+import React from 'react'
+import { Link } from 'react-router-dom'
+import { FaCheckCircle } from 'react-icons/fa' // Un icono bonito
 
 const OrderSuccess = () => {
   return (
@@ -14,15 +14,15 @@ const OrderSuccess = () => {
         <p className="text-xl text-gray-700 mb-8">
           Your payment was successful and your order is confirmed.
         </p>
-        <Link 
-          to="/" 
+        <Link
+          to="/"
           className="bg-brand-accent text-white px-8 py-3 rounded-lg text-lg hover:bg-opacity-90 transition-colors"
         >
           Continue Shopping
         </Link>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default OrderSuccess;
+export default OrderSuccess
