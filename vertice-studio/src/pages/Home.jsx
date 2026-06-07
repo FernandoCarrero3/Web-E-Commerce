@@ -2,6 +2,7 @@ import React, { useState, useMemo } from 'react'
 import { products, CATEGORIES } from '../data'
 import ProductCard from '../components/ProductCard'
 import { FiSearch } from 'react-icons/fi'
+import heroImg from '../assets/images/product1.jpg'
 
 const Home = () => {
   const [search, setSearch] = useState('')
@@ -21,8 +22,16 @@ const Home = () => {
   return (
     <>
       {/* Hero */}
-      <section className="bg-brand-dark text-white">
-        <div className="container mx-auto px-6 py-28 md:py-40">
+      <section
+        className="relative text-white overflow-hidden"
+        style={{
+          backgroundImage: `url(${heroImg})`,
+          backgroundSize: 'cover',
+          backgroundPosition: 'center',
+        }}
+      >
+        <div className="absolute inset-0 bg-gradient-to-r from-black/90 via-black/70 to-black/30" />
+        <div className="relative container mx-auto px-6 py-28 md:py-40">
           <p className="text-[10px] tracking-[0.4em] uppercase text-gray-500 mb-6">
             The Collection &mdash; 2025
           </p>
