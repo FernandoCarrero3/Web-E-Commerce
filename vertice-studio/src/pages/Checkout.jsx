@@ -1,29 +1,14 @@
-// src/pages/Checkout.jsx
 import React from 'react'
-import { useCart } from '../context/CartContext'
-import { useNavigate } from 'react-router-dom' // Para redirigir
+import { useCart } from '../context/useCart'
+import { useNavigate } from 'react-router-dom'
 
 const Checkout = () => {
-  // 1. Obtenemos lo que necesitamos del carrito
   const { cartItems, cartTotal, clearCart } = useCart()
-
-  // 2. Usamos 'useNavigate' para poder redirigir al usuario
   const navigate = useNavigate()
 
-  // 3. Esta función se ejecutará al enviar el formulario
   const handleSubmit = event => {
-    event.preventDefault() // Previene que la página se recargue
-
-    // --- SIMULACIÓN DE PROCESO DE PAGO ---
-    // En una app real, aquí enviarías los datos del formulario
-    // y el 'cartItems' a tu backend o a una pasarela de pago (Stripe, PayPal).
-
-    console.log('Procesando pago... (Simulado)')
-
-    // 4. Limpiamos el carrito
+    event.preventDefault()
     clearCart()
-
-    // 5. Redirigimos al usuario a la página de "Éxito"
     navigate('/order-success')
   }
 
@@ -34,14 +19,10 @@ const Checkout = () => {
       </h1>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
-        {/* Columna Izquierda: Formulario de Pago */}
         <div>
           <h2 className="text-2xl font-bold text-brand-dark mb-6">
             Billing Details
           </h2>
-          {/* Usamos 'onSubmit' en el <form> en lugar de 'onClick' en el botón.
-            Esto es mejor para accesibilidad y semántica (ej. funciona con "Enter").
-          */}
           <form onSubmit={handleSubmit} className="space-y-4">
             <div>
               <label
@@ -86,7 +67,6 @@ const Checkout = () => {
               />
             </div>
 
-            {/* Simulación de Pago */}
             <fieldset className="pt-4">
               <legend className="text-lg font-medium text-brand-dark">
                 Payment Details (Demo)
@@ -152,7 +132,6 @@ const Checkout = () => {
           </form>
         </div>
 
-        {/* Columna Derecha: Resumen del Pedido */}
         <div className="bg-white p-6 rounded-lg shadow-md h-fit sticky top-24">
           <h2 className="text-2xl font-bold text-brand-dark mb-6">
             Your Order
