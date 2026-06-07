@@ -1,5 +1,5 @@
 import React from 'react'
-import { useParams } from 'react-router-dom'
+import { useParams, Link } from 'react-router-dom'
 import { products } from '../data'
 import { useCart } from '../context/useCart'
 
@@ -9,33 +9,80 @@ const ProductDetail = () => {
   const { addToCart } = useCart()
 
   if (!product) {
-    return <div className="text-center text-2xl mt-12">Product not found.</div>
+    return (
+      <div className="container mx-auto px-6 py-32 text-center">
+        <p className="text-gray-400 mb-4 text-sm">
+          This print no longer exists.
+        </p>
+        <Link
+          to="/"
+          className="text-xs uppercase tracking-widest underline underline-offset-4 text-brand-dark"
+        >
+          Back to collection
+        </Link>
+      </div>
+    )
   }
 
   return (
-    <div className="container mx-auto p-4 pt-12">
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
-        <div>
+    <div className="container mx-auto px-6 py-12 max-w-5xl">
+      <Link
+        to="/"
+        className="text-[11px] text-gray-400 hover:text-brand-dark transition-colors tracking-[0.15em] uppercase inline-flex items-center gap-2 mb-12"
+      >
+        &larr; Collection
+      </Link>
+
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-16 items-start">
+        <div className="bg-gray-50 overflow-hidden">
           <img
             src={product.image}
             alt={product.name}
-            className="w-full h-auto rounded-lg shadow-lg"
+            className="w-full h-auto"
           />
         </div>
-        <div>
-          <h1 className="text-4xl font-bold text-brand-dark mb-4">
+
+        <div className="md:pt-4">
+          <span className="text-[10px] tracking-[0.2em] uppercase text-brand-muted">
+            {product.category}
+          </span>
+          <h1 className="font-heading text-4xl md:text-5xl font-medium text-brand-dark mt-2 mb-4 leading-tight">
             {product.name}
           </h1>
-          <p className="text-3xl font-bold text-brand-accent mb-6">
-            ${product.price}
+          <p className="text-2xl font-semibold text-brand-dark mb-8">
+            ${product.price.toFixed(2)}
           </p>
-          <p className="text-lg text-gray-700 mb-8">{product.description}</p>
+          <p className="text-gray-500 leading-relaxed mb-10 text-sm max-w-sm">
+            {product.description}
+          </p>
+
           <button
             onClick={() => addToCart(product)}
-            className="w-full md:w-auto bg-brand-accent text-white px-10 py-3 rounded-lg text-lg hover:bg-opacity-90 transition-colors"
+            className="w-full bg-brand-dark text-white py-4 text-[11px] tracking-[0.25em] uppercase hover:opacity-80 transition-opacity mb-4"
           >
             Add to Cart
           </button>
+          <Link
+            to="/cart"
+            className="w-full block text-center border border-gray-200 text-brand-dark py-4 text-[11px] tracking-[0.25em] uppercase hover:border-brand-dark transition-colors"
+          >
+            View Cart
+          </Link>
+
+          <div className="mt-10 pt-8 border-t border-gray-100 space-y-3">
+            {[
+              { label: 'Format', value: 'Digital Print · High Resolution' },
+              { label: 'License', value: 'Personal Use' },
+              { label: 'Category', value: product.category },
+            ].map(({ label, value }) => (
+              <div key={label} className="flex justify-between text-xs">
+                <span className="text-gray-400 uppercase tracking-wider">
+                  {label}
+                </span>
+                <span className="text-brand-dark">{value}</span>
+              </div>
+            ))}
+          </div>
         </div>
       </div>
     </div>

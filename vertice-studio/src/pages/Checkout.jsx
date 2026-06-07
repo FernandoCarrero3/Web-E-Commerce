@@ -1,6 +1,11 @@
 import React from 'react'
 import { useCart } from '../context/useCart'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, Link } from 'react-router-dom'
+
+const inputClass =
+  'w-full border-b border-gray-200 focus:border-brand-dark bg-transparent py-2 text-sm outline-none transition-colors placeholder-gray-300'
+const labelClass =
+  'block text-[10px] tracking-[0.2em] uppercase text-gray-400 mb-2'
 
 const Checkout = () => {
   const { cartItems, cartTotal, clearCart } = useCart()
@@ -13,72 +18,67 @@ const Checkout = () => {
   }
 
   return (
-    <div className="container mx-auto p-4 max-w-4xl">
-      <h1 className="text-3xl font-bold my-8 text-center text-brand-dark">
+    <div className="container mx-auto px-6 py-12 max-w-5xl">
+      <Link
+        to="/cart"
+        className="text-[11px] text-gray-400 hover:text-brand-dark transition-colors tracking-[0.15em] uppercase inline-flex items-center gap-2 mb-12"
+      >
+        &larr; Cart
+      </Link>
+
+      <h1 className="font-heading text-3xl font-medium text-brand-dark mb-12">
         Checkout
       </h1>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
-        <div>
-          <h2 className="text-2xl font-bold text-brand-dark mb-6">
-            Billing Details
-          </h2>
-          <form onSubmit={handleSubmit} className="space-y-4">
-            <div>
-              <label
-                htmlFor="name"
-                className="block text-sm font-medium text-gray-700"
-              >
-                Full Name
-              </label>
-              <input
-                type="text"
-                id="name"
-                required
-                className="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm"
-              />
-            </div>
-            <div>
-              <label
-                htmlFor="email"
-                className="block text-sm font-medium text-gray-700"
-              >
-                Email Address
-              </label>
-              <input
-                type="email"
-                id="email"
-                required
-                className="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm"
-              />
-            </div>
-            <div>
-              <label
-                htmlFor="address"
-                className="block text-sm font-medium text-gray-700"
-              >
-                Shipping Address
-              </label>
-              <input
-                type="text"
-                id="address"
-                required
-                className="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm"
-              />
-            </div>
-
-            <fieldset className="pt-4">
-              <legend className="text-lg font-medium text-brand-dark">
-                Payment Details (Demo)
-              </legend>
-              <p className="text-sm text-gray-500 mb-4">
-                Use fake data. This is for simulation only.
-              </p>
+      <div className="grid grid-cols-1 lg:grid-cols-5 gap-16">
+        {/* Form */}
+        <form onSubmit={handleSubmit} className="lg:col-span-3 space-y-10">
+          <div>
+            <h2 className="text-[10px] tracking-[0.25em] uppercase text-gray-400 mb-7">
+              Billing Details
+            </h2>
+            <div className="space-y-6">
               <div>
-                <label
-                  htmlFor="card"
-                  className="block text-sm font-medium text-gray-700"
-                >
+                <label htmlFor="name" className={labelClass}>
+                  Full Name
+                </label>
+                <input type="text" id="name" required className={inputClass} />
+              </div>
+              <div>
+                <label htmlFor="email" className={labelClass}>
+                  Email Address
+                </label>
+                <input
+                  type="email"
+                  id="email"
+                  required
+                  className={inputClass}
+                />
+              </div>
+              <div>
+                <label htmlFor="address" className={labelClass}>
+                  Shipping Address
+                </label>
+                <input
+                  type="text"
+                  id="address"
+                  required
+                  className={inputClass}
+                />
+              </div>
+            </div>
+          </div>
+
+          <div>
+            <h2 className="text-[10px] tracking-[0.25em] uppercase text-gray-400 mb-2">
+              Payment Details
+            </h2>
+            <p className="text-xs text-gray-400 mb-7">
+              Demo only &mdash; use any fake card number.
+            </p>
+            <div className="space-y-6">
+              <div>
+                <label htmlFor="card" className={labelClass}>
                   Card Number
                 </label>
                 <input
@@ -86,15 +86,12 @@ const Checkout = () => {
                   id="card"
                   placeholder="1234 5678 9012 3456"
                   required
-                  className="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm"
+                  className={inputClass}
                 />
               </div>
-              <div className="flex gap-4 mt-4">
-                <div className="flex-1">
-                  <label
-                    htmlFor="expiry"
-                    className="block text-sm font-medium text-gray-700"
-                  >
+              <div className="grid grid-cols-2 gap-6">
+                <div>
+                  <label htmlFor="expiry" className={labelClass}>
                     Expiry (MM/YY)
                   </label>
                   <input
@@ -102,14 +99,11 @@ const Checkout = () => {
                     id="expiry"
                     placeholder="12/26"
                     required
-                    className="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm"
+                    className={inputClass}
                   />
                 </div>
-                <div className="flex-1">
-                  <label
-                    htmlFor="cvc"
-                    className="block text-sm font-medium text-gray-700"
-                  >
+                <div>
+                  <label htmlFor="cvc" className={labelClass}>
                     CVC
                   </label>
                   <input
@@ -117,53 +111,55 @@ const Checkout = () => {
                     id="cvc"
                     placeholder="123"
                     required
-                    className="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm"
+                    className={inputClass}
                   />
                 </div>
               </div>
-            </fieldset>
+            </div>
+          </div>
 
-            <button
-              type="submit"
-              className="w-full bg-brand-accent text-white py-3 rounded-lg text-lg font-semibold hover:bg-opacity-90 transition-colors mt-6"
-            >
-              Confirm and Pay ${cartTotal.toFixed(2)}
-            </button>
-          </form>
-        </div>
+          <button
+            type="submit"
+            className="w-full bg-brand-dark text-white py-4 text-[11px] tracking-[0.25em] uppercase hover:opacity-80 transition-opacity"
+          >
+            Confirm and Pay &mdash; ${cartTotal.toFixed(2)}
+          </button>
+        </form>
 
-        <div className="bg-white p-6 rounded-lg shadow-md h-fit sticky top-24">
-          <h2 className="text-2xl font-bold text-brand-dark mb-6">
-            Your Order
-          </h2>
-          <div className="space-y-4">
-            {cartItems.map(item => (
-              <div key={item.id} className="flex justify-between items-center">
-                <div className="flex items-center gap-3">
+        {/* Order summary */}
+        <div className="lg:col-span-2">
+          <div className="bg-brand-light p-8 sticky top-24">
+            <h2 className="text-[10px] tracking-[0.25em] uppercase text-gray-400 mb-6">
+              Your Order
+            </h2>
+            <div className="space-y-4">
+              {cartItems.map(item => (
+                <div key={item.id} className="flex gap-3 items-center">
                   <img
                     src={item.image}
                     alt={item.name}
-                    className="w-16 h-16 object-cover rounded-md"
+                    className="w-12 h-12 object-cover flex-shrink-0"
                   />
-                  <div>
-                    <h3 className="font-semibold text-brand-dark">
+                  <div className="flex-grow min-w-0">
+                    <p className="text-xs font-medium text-brand-dark truncate">
                       {item.name}
-                    </h3>
-                    <p className="text-sm text-gray-600">
-                      Qty: {item.quantity}
+                    </p>
+                    <p className="text-[11px] text-gray-400">
+                      Qty {item.quantity}
                     </p>
                   </div>
+                  <span className="text-xs font-semibold text-brand-dark flex-shrink-0">
+                    ${(item.price * item.quantity).toFixed(2)}
+                  </span>
                 </div>
-                <span className="font-semibold">
-                  ${(item.price * item.quantity).toFixed(2)}
-                </span>
-              </div>
-            ))}
-          </div>
-          <hr className="my-6" />
-          <div className="flex justify-between items-center text-2xl font-bold">
-            <span>Total</span>
-            <span>${cartTotal.toFixed(2)}</span>
+              ))}
+            </div>
+            <div className="border-t border-gray-200 mt-6 pt-5 flex justify-between items-center">
+              <span className="text-sm font-medium text-brand-dark">Total</span>
+              <span className="font-semibold text-brand-dark">
+                ${cartTotal.toFixed(2)}
+              </span>
+            </div>
           </div>
         </div>
       </div>
