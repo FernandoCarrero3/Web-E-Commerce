@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react'
+import toast from 'react-hot-toast'
 import { CartContext } from './cartContext'
 
 export const CartProvider = ({ children }) => {
@@ -20,18 +21,24 @@ export const CartProvider = ({ children }) => {
     setCartItems(prevItems => {
       const existingItem = prevItems.find(item => item.id === product.id)
       if (existingItem) {
+        toast(`${product.name} — qty updated`, { icon: '＋' })
         return prevItems.map(item =>
           item.id === product.id
             ? { ...item, quantity: item.quantity + 1 }
             : item
         )
       }
+      toast.success(`${product.name} added to cart`)
       return [...prevItems, { ...product, quantity: 1 }]
     })
   }
 
   const removeFromCart = productId => {
-    setCartItems(prevItems => prevItems.filter(item => item.id !== productId))
+    setCartItems(prevItems => {
+      const item = prevItems.find(i => i.id === productId)
+      if (item) toast(`${item.name} removed`, { icon: '×' })
+      return prevItems.filter(i => i.id !== productId)
+    })
   }
 
   const decrementItem = productId => {
@@ -40,6 +47,7 @@ export const CartProvider = ({ children }) => {
         .map(item => {
           if (item.id === productId) {
             const newQuantity = item.quantity - 1
+            if (newQuantity === 0) toast(`${item.name} removed`, { icon: '×' })
             return newQuantity > 0 ? { ...item, quantity: newQuantity } : null
           }
           return item
