@@ -57,7 +57,7 @@ export const products = [
     price: 22.5,
     category: 'Abstract',
     image:
-      'https://images.unsplash.com/photo-1547555999-14e818e09e33?w=800&q=80&fit=crop&auto=format',
+      'https://images.unsplash.com/photo-1500462269153-24a10928dd4c?w=800&q=80&fit=crop&auto=format',
     description:
       'Inspired by ink dropped in water, this piece captures a fleeting moment of chaos and beauty frozen in time.',
   },
@@ -67,7 +67,7 @@ export const products = [
     price: 19.99,
     category: 'Minimalist',
     image:
-      'https://images.unsplash.com/photo-1464983953574-0892a716854b?w=800&q=80&fit=crop&auto=format',
+      'https://images.unsplash.com/photo-1531306728370-e2ebd9d7bb99?w=800&q=80&fit=crop&auto=format',
     description:
       'A single element centered in generous white space. Evokes stillness and intentionality — perfect for a meditation or wellness space.',
   },
@@ -77,7 +77,7 @@ export const products = [
     price: 21.0,
     category: 'Minimalist',
     image:
-      'https://images.unsplash.com/photo-1519638399535-1b036603ac77?w=800&q=80&fit=crop&auto=format',
+      'https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?w=800&q=80&fit=crop&auto=format',
     description:
       'Two delicate lines on an off-white background. Subtlety is its strength — this print complements rather than competes with its surroundings.',
   },
@@ -97,7 +97,7 @@ export const products = [
     price: 31.0,
     category: 'Geometric',
     image:
-      'https://images.unsplash.com/photo-1509908578504-a9e22a4cbbb7?w=800&q=80&fit=crop&auto=format',
+      'https://images.unsplash.com/photo-1558618047-3c8c76ca7d13?w=800&q=80&fit=crop&auto=format',
     description:
       'A precise honeycomb tessellation rendered in cool monochrome. Brings a technical, architectural quality to contemporary spaces.',
   },
@@ -107,7 +107,7 @@ export const products = [
     price: 35.0,
     category: 'Geometric',
     image:
-      'https://images.unsplash.com/photo-1465056836041-ea6b2a66b0a9?w=800&q=80&fit=crop&auto=format',
+      'https://images.unsplash.com/photo-1527853787153-6cce0df1946f?w=800&q=80&fit=crop&auto=format',
     description:
       'A triangulated prism effect with gradient fills. Vibrant yet structured — a great choice for creative studios and tech-forward interiors.',
   },
@@ -117,7 +117,7 @@ export const products = [
     price: 28.0,
     category: 'Geometric',
     image:
-      'https://images.unsplash.com/photo-1486325212027-8081e485255e?w=800&q=80&fit=crop&auto=format',
+      'https://images.unsplash.com/photo-1515630771352-3c9ac0e7d2a8?w=800&q=80&fit=crop&auto=format',
     description:
       'Sharp polygonal forms in warm amber and deep navy evoke a geometric sunset. Sophisticated and striking in equal measure.',
   },
