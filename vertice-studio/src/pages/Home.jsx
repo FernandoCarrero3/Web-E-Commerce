@@ -102,13 +102,13 @@ const Home = () => {
           </motion.p>
 
           <motion.h1
-            className="font-heading font-medium leading-[1.0] max-w-3xl mb-8"
+            className="font-heading font-medium leading-[1.05] max-w-3xl mb-8"
             variants={heroItem}
           >
-            <span className="block text-[13vw] md:text-[7.5rem] lg:text-[9rem]">
+            <span className="block text-[clamp(2.8rem,6.5vw,9rem)]">
               Art for walls
             </span>
-            <span className="block text-[13vw] md:text-[7.5rem] lg:text-[9rem] italic font-normal text-white/70">
+            <span className="block text-[clamp(2.8rem,6.5vw,9rem)] italic font-normal text-white/70">
               that say something.
             </span>
           </motion.h1>
