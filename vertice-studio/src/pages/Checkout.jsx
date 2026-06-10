@@ -1,18 +1,52 @@
 import React from 'react'
+import { useForm } from 'react-hook-form'
+import { zodResolver } from '@hookform/resolvers/zod'
+import { z } from 'zod'
 import { useCart } from '../context/useCart'
 import { useNavigate, Link } from 'react-router-dom'
 
-const inputClass =
-  'w-full border-b border-gray-200 focus:border-brand-dark bg-transparent py-2 text-sm outline-none transition-colors placeholder-gray-300'
+const checkoutSchema = z.object({
+  name: z.string().min(2, 'Enter your full name'),
+  email: z.string().email('Enter a valid email address'),
+  address: z.string().min(5, 'Enter a valid shipping address'),
+  card: z
+    .string()
+    .regex(
+      /^\d{4}[\s-]?\d{4}[\s-]?\d{4}[\s-]?\d{4}$/,
+      'Enter a valid 16-digit card number'
+    ),
+  expiry: z.string().regex(/^(0[1-9]|1[0-2])\/\d{2}$/, 'Format must be MM/YY'),
+  cvc: z.string().regex(/^\d{3,4}$/, 'CVC must be 3 or 4 digits'),
+})
+
 const labelClass =
   'block text-[10px] tracking-[0.2em] uppercase text-gray-400 mb-2'
+
+const inputClass = hasError =>
+  `w-full border-b bg-transparent py-2 text-sm outline-none transition-colors placeholder-gray-300 ${
+    hasError
+      ? 'border-red-400 focus:border-red-500'
+      : 'border-gray-200 focus:border-brand-dark'
+  }`
+
+const FieldError = ({ message }) =>
+  message ? (
+    <p className="mt-1.5 text-[11px] text-red-400 tracking-wide">{message}</p>
+  ) : null
 
 const Checkout = () => {
   const { cartItems, cartTotal, clearCart } = useCart()
   const navigate = useNavigate()
 
-  const handleSubmit = event => {
-    event.preventDefault()
+  const {
+    register,
+    handleSubmit,
+    formState: { errors, isSubmitting },
+  } = useForm({
+    resolver: zodResolver(checkoutSchema),
+  })
+
+  const onSubmit = () => {
     clearCart()
     navigate('/order-success')
   }
@@ -32,7 +66,11 @@ const Checkout = () => {
 
       <div className="grid grid-cols-1 lg:grid-cols-5 gap-16">
         {/* Form */}
-        <form onSubmit={handleSubmit} className="lg:col-span-3 space-y-10">
+        <form
+          onSubmit={handleSubmit(onSubmit)}
+          className="lg:col-span-3 space-y-10"
+        >
+          {/* Billing Details */}
           <div>
             <h2 className="text-[10px] tracking-[0.25em] uppercase text-gray-400 mb-7">
               Billing Details
@@ -42,33 +80,47 @@ const Checkout = () => {
                 <label htmlFor="name" className={labelClass}>
                   Full Name
                 </label>
-                <input type="text" id="name" required className={inputClass} />
+                <input
+                  id="name"
+                  type="text"
+                  placeholder="Jane Smith"
+                  {...register('name')}
+                  className={inputClass(errors.name)}
+                />
+                <FieldError message={errors.name?.message} />
               </div>
+
               <div>
                 <label htmlFor="email" className={labelClass}>
                   Email Address
                 </label>
                 <input
-                  type="email"
                   id="email"
-                  required
-                  className={inputClass}
+                  type="email"
+                  placeholder="jane@example.com"
+                  {...register('email')}
+                  className={inputClass(errors.email)}
                 />
+                <FieldError message={errors.email?.message} />
               </div>
+
               <div>
                 <label htmlFor="address" className={labelClass}>
                   Shipping Address
                 </label>
                 <input
-                  type="text"
                   id="address"
-                  required
-                  className={inputClass}
+                  type="text"
+                  placeholder="123 Main St, London"
+                  {...register('address')}
+                  className={inputClass(errors.address)}
                 />
+                <FieldError message={errors.address?.message} />
               </div>
             </div>
           </div>
 
+          {/* Payment Details */}
           <div>
             <h2 className="text-[10px] tracking-[0.25em] uppercase text-gray-400 mb-2">
               Payment Details
@@ -82,37 +134,44 @@ const Checkout = () => {
                   Card Number
                 </label>
                 <input
-                  type="text"
                   id="card"
+                  type="text"
                   placeholder="1234 5678 9012 3456"
-                  required
-                  className={inputClass}
+                  maxLength={19}
+                  {...register('card')}
+                  className={inputClass(errors.card)}
                 />
+                <FieldError message={errors.card?.message} />
               </div>
+
               <div className="grid grid-cols-2 gap-6">
                 <div>
                   <label htmlFor="expiry" className={labelClass}>
                     Expiry (MM/YY)
                   </label>
                   <input
-                    type="text"
                     id="expiry"
+                    type="text"
                     placeholder="12/26"
-                    required
-                    className={inputClass}
+                    maxLength={5}
+                    {...register('expiry')}
+                    className={inputClass(errors.expiry)}
                   />
+                  <FieldError message={errors.expiry?.message} />
                 </div>
                 <div>
                   <label htmlFor="cvc" className={labelClass}>
                     CVC
                   </label>
                   <input
-                    type="text"
                     id="cvc"
+                    type="text"
                     placeholder="123"
-                    required
-                    className={inputClass}
+                    maxLength={4}
+                    {...register('cvc')}
+                    className={inputClass(errors.cvc)}
                   />
+                  <FieldError message={errors.cvc?.message} />
                 </div>
               </div>
             </div>
@@ -120,7 +179,8 @@ const Checkout = () => {
 
           <button
             type="submit"
-            className="w-full bg-brand-dark text-white py-4 text-[11px] tracking-[0.25em] uppercase hover:opacity-80 transition-opacity"
+            disabled={isSubmitting}
+            className="w-full bg-brand-dark text-white py-4 text-[11px] tracking-[0.25em] uppercase hover:opacity-80 transition-opacity disabled:opacity-50"
           >
             Confirm and Pay &mdash; ${cartTotal.toFixed(2)}
           </button>
