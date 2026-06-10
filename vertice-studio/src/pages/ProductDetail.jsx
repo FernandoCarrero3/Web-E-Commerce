@@ -1,12 +1,34 @@
 import React from 'react'
 import { useParams, Link } from 'react-router-dom'
-import { products } from '../data'
+import { useProducts } from '../context/useProducts'
 import { useCart } from '../context/useCart'
 
 const ProductDetail = () => {
   const { id } = useParams()
-  const product = products.find(p => p.id === Number(id))
+  const { products, loading } = useProducts()
   const { addToCart } = useCart()
+
+  if (loading) {
+    return (
+      <div className="container mx-auto px-6 py-12 max-w-5xl">
+        <div className="animate-pulse">
+          <div className="h-3 bg-gray-100 rounded w-20 mb-12" />
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-16">
+            <div className="aspect-square bg-gray-100" />
+            <div className="space-y-4 md:pt-4">
+              <div className="h-2.5 bg-gray-100 rounded w-20" />
+              <div className="h-8 bg-gray-100 rounded w-64" />
+              <div className="h-6 bg-gray-100 rounded w-24" />
+              <div className="h-3 bg-gray-100 rounded w-full" />
+              <div className="h-3 bg-gray-100 rounded w-4/5" />
+            </div>
+          </div>
+        </div>
+      </div>
+    )
+  }
+
+  const product = products.find(p => p.id === Number(id))
 
   if (!product) {
     return (
@@ -50,7 +72,7 @@ const ProductDetail = () => {
             {product.name}
           </h1>
           <p className="text-2xl font-semibold text-brand-dark mb-8">
-            ${product.price.toFixed(2)}
+            ${Number(product.price).toFixed(2)}
           </p>
           <p className="text-gray-500 leading-relaxed mb-10 text-sm max-w-sm">
             {product.description}

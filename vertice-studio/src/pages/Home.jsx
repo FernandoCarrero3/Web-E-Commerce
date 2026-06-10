@@ -1,10 +1,13 @@
 import React, { useState, useMemo } from 'react'
-import { products, CATEGORIES } from '../data'
+import { useProducts } from '../context/useProducts'
+import { CATEGORIES } from '../data'
 import ProductCard from '../components/ProductCard'
+import ProductSkeleton from '../components/ProductSkeleton'
 import { FiSearch } from 'react-icons/fi'
 import heroImg from '../assets/images/product1.jpg'
 
 const Home = () => {
+  const { products, loading } = useProducts()
   const [search, setSearch] = useState('')
   const [activeCategory, setActiveCategory] = useState('All')
 
@@ -17,7 +20,7 @@ const Home = () => {
         .includes(search.toLowerCase().trim())
       return matchesCategory && matchesSearch
     })
-  }, [search, activeCategory])
+  }, [products, search, activeCategory])
 
   return (
     <>
@@ -88,18 +91,32 @@ const Home = () => {
           </div>
         </div>
 
-        <p className="text-xs text-gray-400 tracking-wide mb-10">
-          {filtered.length} {filtered.length === 1 ? 'print' : 'prints'}{' '}
-          available
-        </p>
+        {!loading && (
+          <p className="text-xs text-gray-400 tracking-wide mb-10">
+            {filtered.length} {filtered.length === 1 ? 'print' : 'prints'}{' '}
+            available
+          </p>
+        )}
 
-        {filtered.length > 0 ? (
+        {/* Skeleton grid */}
+        {loading && (
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-x-6 gap-y-12">
+            {Array.from({ length: 8 }).map((_, i) => (
+              <ProductSkeleton key={i} />
+            ))}
+          </div>
+        )}
+
+        {/* Products grid */}
+        {!loading && filtered.length > 0 && (
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-x-6 gap-y-12">
             {filtered.map(product => (
               <ProductCard key={product.id} product={product} />
             ))}
           </div>
-        ) : (
+        )}
+
+        {!loading && filtered.length === 0 && (
           <div className="text-center py-24">
             <p className="text-gray-400 text-sm mb-5">
               No prints found for &ldquo;{search}&rdquo;
