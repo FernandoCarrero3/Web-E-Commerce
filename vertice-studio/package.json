@@ -26,6 +26,7 @@
   "dependencies": {
     "@hookform/resolvers": "^5.4.0",
     "@supabase/supabase-js": "^2.108.1",
+    "framer-motion": "^12.40.0",
     "react": "^19.1.1",
     "react-dom": "^19.1.1",
     "react-hook-form": "^7.78.0",
@@ -44,6 +45,7 @@
     "@vitejs/plugin-react": "^5.0.4",
     "autoprefixer": "^10.4.21",
     "eslint": "^9.36.0",
+    "eslint-plugin-react": "^7.37.5",
     "eslint-plugin-react-hooks": "^5.2.0",
     "eslint-plugin-react-refresh": "^0.4.22",
     "globals": "^16.4.0",

@@ -1,5 +1,6 @@
 import React from 'react'
 import { useParams, Link } from 'react-router-dom'
+import { motion } from 'framer-motion'
 import { useProducts } from '../context/useProducts'
 import { useCart } from '../context/useCart'
 
@@ -56,15 +57,25 @@ const ProductDetail = () => {
       </Link>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-16 items-start">
-        <div className="bg-gray-50 overflow-hidden">
+        <motion.div
+          className="bg-gray-50 overflow-hidden"
+          initial={{ opacity: 0, scale: 0.97 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.5, ease: [0.25, 0.1, 0.25, 1] }}
+        >
           <img
             src={product.image}
             alt={product.name}
             className="w-full h-auto"
           />
-        </div>
+        </motion.div>
 
-        <div className="md:pt-4">
+        <motion.div
+          className="md:pt-4"
+          initial={{ opacity: 0, x: 20 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ duration: 0.5, delay: 0.1, ease: [0.25, 0.1, 0.25, 1] }}
+        >
           <span className="text-[10px] tracking-[0.2em] uppercase text-brand-muted">
             {product.category}
           </span>
@@ -105,7 +116,7 @@ const ProductDetail = () => {
               </div>
             ))}
           </div>
-        </div>
+        </motion.div>
       </div>
     </div>
   )

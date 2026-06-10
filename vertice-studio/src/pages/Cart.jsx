@@ -1,4 +1,5 @@
 import React from 'react'
+import { motion, AnimatePresence } from 'framer-motion'
 import { useCart } from '../context/useCart'
 import { Link } from 'react-router-dom'
 import { HiOutlineMinus, HiOutlinePlus, HiOutlineX } from 'react-icons/hi'
@@ -38,55 +39,65 @@ const Cart = () => {
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-16">
         {/* Items */}
         <div className="lg:col-span-2 divide-y divide-gray-100">
-          {cartItems.map(item => (
-            <div key={item.id} className="py-6 flex gap-5 items-start">
-              <img
-                src={item.image}
-                alt={item.name}
-                className="w-20 h-20 object-cover bg-gray-50 flex-shrink-0"
-              />
-              <div className="flex-grow min-w-0">
-                <div className="flex justify-between items-start">
-                  <div>
-                    <p className="text-[10px] tracking-[0.15em] uppercase text-gray-400">
-                      {item.category}
-                    </p>
-                    <h3 className="font-medium text-brand-dark mt-0.5 text-sm">
-                      {item.name}
-                    </h3>
-                  </div>
-                  <button
-                    onClick={() => removeFromCart(item.id)}
-                    className="text-gray-300 hover:text-brand-dark transition-colors ml-4 flex-shrink-0"
-                  >
-                    <HiOutlineX size={15} />
-                  </button>
-                </div>
-                <div className="flex items-center justify-between mt-4">
-                  <div className="flex items-center gap-3">
+          <AnimatePresence initial={false}>
+            {cartItems.map(item => (
+              <motion.div
+                key={item.id}
+                className="py-6 flex gap-5 items-start"
+                initial={{ opacity: 0, height: 0 }}
+                animate={{ opacity: 1, height: 'auto' }}
+                exit={{ opacity: 0, height: 0, marginTop: 0, marginBottom: 0 }}
+                transition={{ duration: 0.28, ease: [0.25, 0.1, 0.25, 1] }}
+                style={{ overflow: 'hidden' }}
+              >
+                <img
+                  src={item.image}
+                  alt={item.name}
+                  className="w-20 h-20 object-cover bg-gray-50 flex-shrink-0"
+                />
+                <div className="flex-grow min-w-0">
+                  <div className="flex justify-between items-start">
+                    <div>
+                      <p className="text-[10px] tracking-[0.15em] uppercase text-gray-400">
+                        {item.category}
+                      </p>
+                      <h3 className="font-medium text-brand-dark mt-0.5 text-sm">
+                        {item.name}
+                      </h3>
+                    </div>
                     <button
-                      onClick={() => decrementItem(item.id)}
-                      className="w-7 h-7 border border-gray-200 flex items-center justify-center hover:border-brand-dark transition-colors"
+                      onClick={() => removeFromCart(item.id)}
+                      className="text-gray-300 hover:text-brand-dark transition-colors ml-4 flex-shrink-0"
                     >
-                      <HiOutlineMinus size={11} />
+                      <HiOutlineX size={15} />
                     </button>
-                    <span className="text-sm font-medium w-4 text-center">
-                      {item.quantity}
+                  </div>
+                  <div className="flex items-center justify-between mt-4">
+                    <div className="flex items-center gap-3">
+                      <button
+                        onClick={() => decrementItem(item.id)}
+                        className="w-7 h-7 border border-gray-200 flex items-center justify-center hover:border-brand-dark transition-colors"
+                      >
+                        <HiOutlineMinus size={11} />
+                      </button>
+                      <span className="text-sm font-medium w-4 text-center">
+                        {item.quantity}
+                      </span>
+                      <button
+                        onClick={() => addToCart(item)}
+                        className="w-7 h-7 border border-gray-200 flex items-center justify-center hover:border-brand-dark transition-colors"
+                      >
+                        <HiOutlinePlus size={11} />
+                      </button>
+                    </div>
+                    <span className="font-semibold text-brand-dark text-sm">
+                      ${(item.price * item.quantity).toFixed(2)}
                     </span>
-                    <button
-                      onClick={() => addToCart(item)}
-                      className="w-7 h-7 border border-gray-200 flex items-center justify-center hover:border-brand-dark transition-colors"
-                    >
-                      <HiOutlinePlus size={11} />
-                    </button>
                   </div>
-                  <span className="font-semibold text-brand-dark text-sm">
-                    ${(item.price * item.quantity).toFixed(2)}
-                  </span>
                 </div>
-              </div>
-            </div>
-          ))}
+              </motion.div>
+            ))}
+          </AnimatePresence>
         </div>
 
         {/* Summary */}
